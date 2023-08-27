@@ -8,8 +8,7 @@ def request():
     '''
     api_key = "6641341fcdf34fb7989f2e682ec6b5c0"
     url = f"https://openexchangerates.org/api/latest.json?app_id={api_key}"
-    r = requests.get(url)
-    return r
+    return requests.get(url)
 
 def preprocessing(r):
     '''
@@ -17,8 +16,7 @@ def preprocessing(r):
     @return er: Pandas dataframe.
     '''
     data = r.json()
-    er = pd.DataFrame.from_dict({"rates": data["rates"]}, orient="index")
-    return er
+    return pd.DataFrame.from_dict({"rates": data["rates"]}, orient="index")
 
 def calculation(currency, amount, currency_rec, er):
     """

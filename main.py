@@ -14,10 +14,14 @@ def home():
 def get_exchange_rates():
     """
     Endpoint to get the exchange rates.
+    The line `response = request()` is calling the `request()` function from the `utils.script`
+    module. This function is responsible for making a request to an external API to retrieve the
+    exchange rates. The response from the API is stored in the `response` variable for further
+    preprocessing.
     """
     response = request()
-    exchange_rates = preprocessing(response)
-    return exchange_rates
+    return response.json()
+
 
 @app.get("/convert")
 def convert_currency(currency_give: str, amount_give: float, currency_receive: str):
@@ -27,10 +31,11 @@ def convert_currency(currency_give: str, amount_give: float, currency_receive: s
     response = request()
     exchange_rates = preprocessing(response)
     amount_receive = calculation(currency_give, amount_give, currency_receive, exchange_rates)
-    result = {
+    return {
         "currency_give": currency_give,
         "amount_give": amount_give,
         "currency_receive": currency_receive,
-        "amount_receive": amount_receive
+        "amount_receive": amount_receive,
     }
-    return result
+
+
