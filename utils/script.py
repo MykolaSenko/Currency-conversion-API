@@ -27,13 +27,6 @@ def calculation(currency, amount, currency_rec, er):
     @param er: The Pandas DataFrame containing the exchange rates.
     @return: The converted amount.
     """
-    if currency == "USD":
-        amount_rec = float(amount) * er.at['rates', currency_rec]
-        return round(amount_rec, 2)
-    elif currency_rec == 'USD':
-        amount_rec = float(amount) / er.at['rates', currency]
-        return round(amount_rec, 2)
-    else:
-        amount_in_usd = float(amount) / er.at['rates', currency]
-        amount_rec = amount_in_usd * er.loc['rates', currency_rec]
-        return round(amount_rec, 2)
+    amount_in_usd = float(amount) / er.at['rates', currency.upper()]
+    amount_rec = amount_in_usd * er.loc['rates', currency_rec.upper()]
+    return round(amount_rec, 2)
