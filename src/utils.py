@@ -6,7 +6,12 @@ def request():
     '''
     making an API request to get current currencies rates
     '''
-    api_key = "6641341fcdf34fb7989f2e682ec6b5c0"
+    try:
+        with open('api_key.txt', 'r') as f:
+            api_key = f.readline().strip()
+    except Exception as f:
+        raise Exception(f"Error reading token from file: {f}")
+    print(api_key)
     url = f"https://openexchangerates.org/api/latest.json?app_id={api_key}"
     return requests.get(url)
 

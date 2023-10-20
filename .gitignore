@@ -1,8 +1,9 @@
-# Byte-compiled / optimized / DLL files
+
 __pycache__/
 .vscode/
 .gitignore
 
-# Environments
+
 currency_api/
+api_key.txt
 
